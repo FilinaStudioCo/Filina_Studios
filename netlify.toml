@@ -1,0 +1,12 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/workspace"
+  to = "/workspace/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/workspace/*"
+  to = "/workspace/index.html"
+  status = 200
