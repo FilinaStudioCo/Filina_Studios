@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Workspace — Filina Studios</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/css/workspace.css"/>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+
+<div id="login-screen" class="login-screen">
+  <div class="login-card">
+    <div class="login-logo">🎙️</div>
+    <h1>Filina Studios</h1>
+    <p class="login-sub">Team Workspace Login</p>
+    <div class="login-divider"></div>
+    <button class="btn-login" onclick="netlifyIdentity.open()">🔐 Login with Team Account</button>
+    <p class="login-note">Only authorized team members can access this workspace.<br/>Contact <a href="mailto:3LinaStudios@proton.me">3LinaStudios@proton.me</a> for access.</p>
+    <a href="/" class="back-link">← Back to Aling Lina</a>
+  </div>
+</div>
+
+<div id="workspace" class="workspace hidden">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">🎙️ Filina Studios</div>
+      <div class="user-badge" id="user-badge">👤 Loading...</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">📌 Favorites</div>
+      <a href="#" class="nav-item active" onclick="showSection('dashboard')">🏠 HQ Dashboard</a>
+      <a href="#" class="nav-item" onclick="showSection('tasks')">✅ My Tasks</a>
+      <a href="#" class="nav-item" onclick="showSection('podcast')">🎙️ Production</a>
+      <a href="#" class="nav-item" onclick="showSection('calendar')">📅 Content Calendar</a>
+      <div class="nav-section-label">🏠 HQ</div>
+      <a href="#" class="nav-item" onclick="showSection('projects')">📋 Projects</a>
+      <a href="#" class="nav-item" onclick="showSection('finance')">💰 Finance</a>
+      <a href="#" class="nav-item" onclick="showSection('goals')">🎯 Goals & OKRs</a>
+      <a href="#" class="nav-item" onclick="showSection('team')">👥 Team Directory</a>
+      <a href="#" class="nav-item" onclick="showSection('documents')">📁 Documents</a>
+      <a href="#" class="nav-item" onclick="showSection('wiki')">📖 Company Wiki</a>
+      <div class="nav-section-label">🎙️ Podcast</div>
+      <a href="#" class="nav-item" onclick="showSection('episodes')">🎙️ Episodes</a>
+      <a href="#" class="nav-item" onclick="showSection('equipment')">🛠️ Equipment</a>
+      <div class="nav-section-label">📣 Marketing</div>
+      <a href="#" class="nav-item" onclick="showSection('marketing')">📣 Marketing</a>
+      <a href="#" class="nav-item" onclick="showSection('crm')">🤝 CRM / Contacts</a>
+      <div class="nav-section-label">👤 Private</div>
+      <a href="#" class="nav-item" onclick="showSection('personal')">👤 My Dashboard</a>
+      <a href="#" class="nav-item" onclick="showSection('notes')">📝 My Notes</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="/" class="nav-item">🌐 Public Site</a>
+      <button class="nav-item logout-btn" onclick="logout()">🚪 Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <div id="section-dashboard" class="ws-section active">
+      <div class="page-header"><h1>🏠 Filina Studios HQ</h1><p>Home of Aling Lina Podcast — where ideas become episodes.</p></div>
+      <div class="stats-row">
+        <div class="stat-card purple"><div class="stat-icon">🎙️</div><div class="stat-val">0</div><div class="stat-lbl">Episodes Published</div></div>
+        <div class="stat-card pink"><div class="stat-icon">📥</div><div class="stat-val">0</div><div class="stat-lbl">Total Downloads</div></div>
+        <div class="stat-card orange"><div class="stat-icon">💰</div><div class="stat-val">€0</div><div class="stat-lbl">Revenue This Month</div></div>
+        <div class="stat-card green"><div class="stat-icon">🎯</div><div class="stat-val">0/5</div><div class="stat-lbl">Goals On Track</div></div>
+      </div>
+      <div class="announce-box">
+        <span>📢</span>
+        <div><strong>Announcements</strong><p>Welcome to Filina Studios Workspace! This is your single source of truth. 🎉</p></div>
+      </div>
+      <div class="two-col">
+        <div class="ws-card"><div class="ws-card-header">🔥 This Week's Priorities</div><div class="empty-state">No tasks due this week yet. <button class="add-btn" onclick="showSection('tasks')">+ Add Task</button></div></div>
+        <div class="ws-card"><div class="ws-card-header">📋 Active Projects</div><div class="project-list" id="project-preview"></div></div>
+      </div>
+      <div class="ws-card full-width"><div class="ws-card-header">🎯 Q2 2026 Goals Progress</div><div class="goals-list" id="goals-preview"></div></div>
+      <div class="ws-card full-width">
+        <div class="ws-card-header">🚀 Quick Links</div>
+        <div class="quick-links">
+          <button onclick="showSection('projects')" class="ql-btn">📋 Projects</button>
+          <button onclick="showSection('podcast')" class="ql-btn">🎙️ Production</button>
+          <button onclick="showSection('marketing')" class="ql-btn">📣 Marketing</button>
+          <button onclick="showSection('documents')" class="ql-btn">📁 Wiki</button>
+          <button onclick="showSection('finance')" class="ql-btn">💰 Finance</button>
+          <button onclick="showSection('team')" class="ql-btn">👥 Team</button>
+          <button onclick="showSection('episodes')" class="ql-btn">🎙️ Episodes</button>
+          <button onclick="showSection('crm')" class="ql-btn">🤝 CRM</button>
+          <button onclick="showSection('goals')" class="ql-btn">🎯 Goals</button>
+          <button onclick="showSection('equipment')" class="ql-btn">🛠️ Equipment</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="section-projects" class="ws-section">
+      <div class="page-header"><h1>📋 Projects</h1><button class="add-btn-lg" onclick="openModal('project')">+ New Project</button></div>
+      <div class="table-wrap"><table class="ws-table"><thead><tr><th>Project</th><th>Status</th><th>Priority</th><th>Owner</th><th>Due Date</th><th>Tags</th></tr></thead><tbody id="projects-table"></tbody></table></div>
+    </div>
+
+    <div id="section-tasks" class="ws-section">
+      <div class="page-header"><h1>✅ Tasks</h1><button class="add-btn-lg" onclick="openModal('task')">+ New Task</button></div>
+      <div class="table-wrap"><table class="ws-table"><thead><tr><th>Task</th><th>Status</th><th>Priority</th><th>Owner</th><th>Due Date</th></tr></thead><tbody id="tasks-table"></tbody></table></div>
+    </div>
+
+    <div id="section-podcast" class="ws-section">
+      <div class="page-header"><h1>🎙️ Podcast Production Dashboard</h1></div>
+      <div class="stats-row">
+        <div class="stat-card purple"><div class="stat-icon">📅</div><div class="stat-val">TBD</div><div class="stat-lbl">Next Recording</div></div>
+        <div class="stat-card pink"><div class="stat-icon">📤</div><div class="stat-val">TBD</div><div class="stat-lbl">Next Publish</div></div>
+        <div class="stat-card orange"><div class="stat-icon">✂️</div><div class="stat-val">0</div><div class="stat-lbl">In Production</div></div>
+        <div class="stat-card green"><div class="stat-icon">🟢</div><div class="stat-val">0</div><div class="stat-lbl">Published</div></div>
+      </div>
+      <div class="ws-card full-width"><div class="ws-card-header">🎙️ Production Pipeline</div><div class="kanban-board" id="podcast-kanban"></div></div>
+    </div>
+
+    <div id="section-episodes" class="ws-section">
+      <div class="page-header"><h1>🎙️ Episodes Database</h1><button class="add-btn-lg" onclick="openModal('episode')">+ New Episode</button></div>
+      <div class="table-wrap"><table class="ws-table"><thead><tr><th>Ep#</th><th>Title</th><th>Status</th><th>Record Date</th><th>Publish Date</th><th>Guest</th></tr></thead><tbody id="episodes-table"></tbody></table></div>
+    </div>
+
+    <div id="section-team" class="ws-section">
+      <div class="page-header"><h1>👥 Team Directory</h1></div>
+      <div class="team-gallery" id="team-gallery"></div>
+    </div>
+
+    <div id="section-finance" class="ws-section">
+      <div class="page-header"><h1>💰 Finance & Budget</h1><button class="add-btn-lg" onclick="openModal('finance')">+ Add Entry</button></div>
+      <div class="stats-row">
+        <div class="stat-card green"><div class="stat-icon">💵</div><div class="stat-val">€0</div><div class="stat-lbl">Income This Month</div></div>
+        <div class="stat-card pink"><div class="stat-icon">💸</div><div class="stat-val">€447</div><div class="stat-lbl">Planned Expenses</div></div>
+        <div class="stat-card orange"><div class="stat-icon">📊</div><div class="stat-val">-€447</div><div class="stat-lbl">Net This Month</div></div>
+        <div class="stat-card purple"><div class="stat-icon">⚠️</div><div class="stat-val">0</div><div class="stat-lbl">Outstanding</div></div>
+      </div>
+      <div class="table-wrap"><table class="ws-table"><thead><tr><th>Name</th><th>Type</th><th>Category</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead><tbody id="finance-table"></tbody></table></div>
+    </div>
+
+    <div id="section-goals" class="ws-section">
+      <div class="page-header"><h1>🎯 Goals & OKRs</h1></div>
+      <div class="goals-full" id="goals-full"></div>
+    </div>
+
+    <div id="section-marketing" class="ws-section">
+      <div class="page-header"><h1>📣 Marketing Dashboard</h1><button class="add-btn-lg" onclick="openModal('content')">+ New Content</button></div>
+      <div class="empty-state">📅 Content calendar will populate as you add marketing content.</div>
+    </div>
+
+    <div id="section-crm" class="ws-section">
+      <div class="page-header"><h1>🤝 CRM / Contacts</h1><button class="add-btn-lg" onclick="openModal('contact')">+ New Contact</button></div>
+      <div class="table-wrap"><table class="ws-table"><thead><tr><th>Name</th><th>Type</th><th>Company</th><th>Email</th><th>Status</th><th>Follow-up</th></tr></thead><tbody id="crm-table"><tr><td colspan="6" style="text-align:center;color:#9CA3AF;padding:2rem">No contacts yet. Add your first guest or sponsor!</td></tr></tbody></table></div>
+    </div>
+
+    <div id="section-documents" class="ws-section">
+      <div class="page-header"><h1>📁 Documents & Wiki</h1></div>
+      <div class="doc-grid" id="doc-grid"></div>
+    </div>
+
+    <div id="section-wiki" class="ws-section">
+      <div class="page-header"><h1>📖 Company Wiki</h1></div>
+      <div class="wiki-tree" id="wiki-tree"></div>
+    </div>
+
+    <div id="section-equipment" class="ws-section">
+      <div class="page-header"><h1>🛠️ Equipment & Assets</h1><button class="add-btn-lg" onclick="openModal('equipment')">+ Add Equipment</button></div>
+      <div class="empty-state">No equipment logged yet. Add your studio gear!</div>
+    </div>
+
+    <div id="section-personal" class="ws-section">
+      <div class="page-header"><h1>👤 My Dashboard</h1></div>
+      <div class="announce-box greeting-box"><span>☀️</span><div><strong id="greeting-text">Good morning!</strong><p>Here's your day at a glance.</p></div></div>
+      <div class="two-col">
+        <div class="ws-card"><div class="ws-card-header">✅ My Tasks Today</div><div class="empty-state">No tasks due today.</div></div>
+        <div class="ws-card"><div class="ws-card-header">📆 My Tasks This Week</div><div class="empty-state">No tasks this week yet.</div></div>
+      </div>
+      <div class="ws-card full-width"><div class="ws-card-header">🎯 My Goals</div><div class="empty-state">Your personal goals will appear here.</div></div>
+    </div>
+
+    <div id="section-notes" class="ws-section">
+      <div class="page-header"><h1>📝 Personal Notes</h1></div>
+      <div class="notes-area"><textarea id="personal-notes" placeholder="Write your notes here... (auto-saved)" oninput="saveNotes()"></textarea></div>
+      <div class="ws-card full-width"><div class="ws-card-header">💡 Ideas Inbox</div><div class="ideas-input"><input type="text" id="idea-input" placeholder="Add a new idea..." onkeydown="if(event.key==='Enter')addIdea()"/><button class="add-btn" onclick="addIdea()">+ Add</button></div><ul class="ideas-list" id="ideas-list"></ul></div>
+    </div>
+
+    <div id="section-calendar" class="ws-section">
+      <div class="page-header"><h1>📅 Content Calendar</h1></div>
+      <div class="empty-state" style="margin-top:2rem">📅 Schedule your content here. Add marketing entries to see them on the calendar.</div>
+    </div>
+
+  </main>
+</div>
+
+<div id="modal" class="modal hidden" onclick="closeModalOutside(event)">
+  <div class="modal-content" id="modal-content"></div>
+</div>
+
+<script src="/js/workspace.js"></script>
+</body>
+</html>
