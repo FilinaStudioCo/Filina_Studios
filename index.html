@@ -22,6 +22,7 @@
     <div class="hamburger" onclick="toggleMenu()">☰</div>
   </div>
 </nav>
+
 <section class="hero">
   <div class="hero-content">
     <div class="hero-badge">🌺 Bagong Podcast Alert!</div>
@@ -47,6 +48,7 @@
     </div>
   </div>
 </section>
+
 <section class="section about" id="about">
   <div class="container">
     <div class="section-header">
@@ -60,6 +62,7 @@
     </div>
   </div>
 </section>
+
 <section class="section episodes" id="episodes">
   <div class="container">
     <div class="section-header">
@@ -78,6 +81,7 @@
     </div>
   </div>
 </section>
+
 <section class="section hosts" id="hosts">
   <div class="container">
     <div class="section-header">
@@ -85,12 +89,13 @@
       <h2>Ang Aming mga Host<br/><small>Meet the Hosts</small></h2>
     </div>
     <div class="hosts-grid">
-     <div class="host-card"><div class="host-avatar">👩🏽</div><h3>Angelina</h3><span class="host-role">🎙️ Host</span><p>The heart of every conversation. Warm, curious, and always ready with the perfect question to get the story flowing.</p></div>
-<div class="host-card featured"><div class="host-avatar">👩🏻</div><h3>Catalina</h3><span class="host-role">🎙️ Host & Tech Lead</span><p>The brains behind the sound. Keeps everything running smoothly so the magic — and the laughter — can happen.</p></div>
-<div class="host-card"><div class="host-avatar">👩🏽</div><h3>Rosalinda</h3><span class="host-role">🎙️ Host & Creative Lead</span><p>The creative soul spreading Aling Lina's stories far and wide — with passion, humor, and a whole lot of heart.</p></div>
+      <div class="host-card"><div class="host-avatar">👩🏽</div><h3>Angelina</h3><span class="host-role">🎙️ Host</span><p>The heart of every conversation. Warm, curious, and always ready with the perfect question to get the story flowing.</p></div>
+      <div class="host-card featured"><div class="host-avatar">👩🏻</div><h3>Catalina</h3><span class="host-role">🎙️ Host & Tech Lead</span><p>The brains behind the sound. Keeps everything running smoothly so the magic — and the laughter — can happen.</p></div>
+      <div class="host-card"><div class="host-avatar">👩🏽</div><h3>Rosalinda</h3><span class="host-role">🎙️ Host & Creative Lead</span><p>The creative soul spreading Aling Lina's stories far and wide — with passion, humor, and a whole lot of heart.</p></div>
     </div>
   </div>
 </section>
+
 <section class="section listen" id="listen">
   <div class="container">
     <div class="section-header">
@@ -108,14 +113,16 @@
     <div class="newsletter-box">
       <h3>🔔 Subscribe for Updates</h3>
       <p>Be the first to know when new episodes drop!</p>
-      <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
-        <input type="email" placeholder="Your email address / Email mo" required/>
+      <form class="newsletter-form" name="newsletter" method="POST" data-netlify="true" onsubmit="subscribeNewsletter(event)">
+        <input type="hidden" name="form-name" value="newsletter"/>
+        <input type="email" name="email" placeholder="Your email address / Email mo" required/>
         <button type="submit" class="btn btn-primary">Subscribe!</button>
       </form>
       <div id="subscribe-msg" class="success-msg" style="display:none">🌺 Salamat! Thank you for subscribing!</div>
     </div>
   </div>
 </section>
+
 <section class="section sponsor">
   <div class="container">
     <div class="sponsor-banner">
@@ -129,6 +136,7 @@
     </div>
   </div>
 </section>
+
 <section class="section contact" id="contact">
   <div class="container">
     <div class="section-header">
@@ -137,4 +145,47 @@
     </div>
     <div class="contact-grid">
       <div class="contact-info">
-        <div class="contact-item"><span>📧</span>
+        <div class="contact-item"><span>📧</span><div><strong>Email</strong><p><a href="mailto:3LinaStudios@proton.me">3LinaStudios@proton.me</a></p></div></div>
+        <div class="contact-item"><span>🎙️</span><div><strong>Guest Appearances</strong><p>Want to be on the show? Email us!</p></div></div>
+        <div class="contact-item"><span>💼</span><div><strong>Sponsorships</strong><p>Interested in advertising? Let's talk!</p></div></div>
+        <div class="social-links">
+          <a href="#" class="social-btn">📷 Instagram</a>
+          <a href="#" class="social-btn">🎵 TikTok</a>
+          <a href="#" class="social-btn">▶️ YouTube</a>
+          <a href="#" class="social-btn">🐦 Twitter/X</a>
+        </div>
+      </div>
+      <form class="contact-form" name="contact" method="POST" data-netlify="true" onsubmit="sendContact(event)">
+        <input type="hidden" name="form-name" value="contact"/>
+        <input type="text" name="name" placeholder="Your Name / Pangalan mo" required/>
+        <input type="email" name="email" placeholder="Email Address" required/>
+        <select name="inquiry">
+          <option value="">Type of inquiry</option>
+          <option>Guest Appearance</option>
+          <option>Sponsorship</option>
+          <option>Collaboration</option>
+          <option>General Question</option>
+          <option>Press / Media</option>
+        </select>
+        <textarea name="message" placeholder="Your message / Mensahe mo..." rows="5" required></textarea>
+        <button type="submit" class="btn btn-primary">📤 Send Message</button>
+        <div id="contact-msg" class="success-msg" style="display:none">🌺 Salamat! We'll get back to you soon!</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><div class="footer-logo">🎙️ Filina Studios</div><p>Home of Aling Lina Podcast.</p><p><a href="mailto:3LinaStudios@proton.me">3LinaStudios@proton.me</a></p></div>
+      <div class="footer-links"><h4>Quick Links</h4><a href="#about">About</a><a href="#episodes">Episodes</a><a href="#hosts">Hosts</a><a href="#listen">Listen</a><a href="#contact">Contact</a></div>
+      <div class="footer-links"><h4>Listen On</h4><a href="#">Spotify</a><a href="#">Apple Podcasts</a><a href="#">YouTube</a><a href="#">Amazon Music</a></div>
+      <div class="footer-links"><h4>Follow Us</h4><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Twitter/X</a><a href="#">Facebook</a></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 Filina Studios. All rights reserved. Made with 💜 and ☕</p><a href="/workspace" class="footer-admin">Team Login</a></div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
