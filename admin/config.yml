@@ -1,0 +1,29 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "episodes"
+    label: "Episodes"
+    folder: "_data/episodes"
+    create: true
+    slug: "ep{{fields.number}}"
+    fields:
+      - {label: "Episode Number", name: "number", widget: "number"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Status", name: "status", widget: "select", options: ["Idea", "Planned", "Recording Scheduled", "Editing", "Ready to Publish", "Published"]}
+      - {label: "Recording Date", name: "recordDate", widget: "datetime", required: false}
+      - {label: "Publish Date", name: "publishDate", widget: "datetime", required: false}
+      - {label: "Guest Name", name: "guest", widget: "string", required: false}
+      - {label: "Topic Summary", name: "summary", widget: "text", required: false}
+  - name: "announcements"
+    label: "Announcements"
+    folder: "_data/announcements"
+    create: true
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Message", name: "message", widget: "text"}
+      - {label: "Date", name: "date", widget: "datetime"}
