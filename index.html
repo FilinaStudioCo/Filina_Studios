@@ -1,11 +1,140 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Filina Studios CMS</title>
+  <title>Aling Lina Podcast | Filina Studios</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-</body>
-</html>
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">🎙️ <span>Filina Studios</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#episodes">Episodes</a></li>
+      <li><a href="#hosts">Hosts</a></li>
+      <li><a href="#listen">Listen</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="/workspace" class="nav-btn">Team Login</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+  </div>
+</nav>
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">🌺 Bagong Podcast Alert!</div>
+    <h1 class="hero-title">Aling Lina</h1>
+    <p class="hero-tagline">Home of Aling Lina Podcast — where ideas become episodes.</p>
+    <p class="hero-sub">Kwento. Tawa. Katotohanan. — Stories, Laughs & Real Talk</p>
+    <div class="hero-buttons">
+      <a href="#listen" class="btn btn-primary">🎧 Makinig Na / Listen Now</a>
+      <a href="#episodes" class="btn btn-secondary">📻 All Episodes</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num" id="ep-count">0</span><span class="stat-label">Episodes</span></div>
+      <div class="stat"><span class="stat-num" id="dl-count">0</span><span class="stat-label">Downloads</span></div>
+      <div class="stat"><span class="stat-num">3</span><span class="stat-label">Hosts</span></div>
+    </div>
+  </div>
+  <div class="hero-art">
+    <div class="podcast-circle">
+      <div class="mic-icon">🎙️</div>
+      <div class="circle-ring ring1"></div>
+      <div class="circle-ring ring2"></div>
+      <div class="circle-ring ring3"></div>
+    </div>
+  </div>
+</section>
+<section class="section about" id="about">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">🌸 About the Show</span>
+      <h2>Ano ang Aling Lina?<br/><small>What is Aling Lina?</small></h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-card"><div class="about-icon">🌺</div><h3>Our Story</h3><p>Born from late-night conversations and big dreams, Aling Lina is a podcast by Filina Studios — a passionate 3-person team dedicated to creating authentic, entertaining, and meaningful content.</p></div>
+      <div class="about-card"><div class="about-icon">🎯</div><h3>Mission / Misyon</h3><p>To create a space where real stories are told with heart, humor, and honesty — celebrating Filipino culture, experiences, and voices from all walks of life.</p></div>
+      <div class="about-card"><div class="about-icon">✨</div><h3>What to Expect</h3><p>From hilarious personal stories to deep meaningful conversations — every episode of Aling Lina feels like sitting down with your favorite tita over coffee.</p></div>
+    </div>
+  </div>
+</section>
+<section class="section episodes" id="episodes">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">📻 Episodes</span>
+      <h2>Latest Episodes</h2>
+      <p>Bagong episodes every week — don't miss out!</p>
+    </div>
+    <div class="episodes-grid" id="episodes-grid"></div>
+    <div class="episodes-coming" id="coming-soon">
+      <div class="coming-card">
+        <div class="coming-icon">🎙️</div>
+        <h3>Paparating na! / Coming Soon!</h3>
+        <p>Our first episodes are in production. Subscribe so you don't miss the launch!</p>
+        <a href="#listen" class="btn btn-primary">🔔 Get Notified</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section hosts" id="hosts">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">👥 Meet the Team</span>
+      <h2>Ang Aming mga Host<br/><small>Meet the Hosts</small></h2>
+    </div>
+    <div class="hosts-grid">
+      <div class="host-card"><div class="host-avatar">👩</div><h3>Person 1</h3><span class="host-role">🎙️ Host</span><p>The voice that starts every conversation. Warm, curious, and always ready with a great question.</p></div>
+      <div class="host-card featured"><div class="host-avatar">🧑</div><h3>Person 2</h3><span class="host-role">🎙️ Host & Tech Lead</span><p>The brains behind the sound. Keeps everything running smoothly so the magic can happen.</p></div>
+      <div class="host-card"><div class="host-avatar">👩</div><h3>Person 3</h3><span class="host-role">🎙️ Host & Marketing Lead</span><p>The creative force spreading Aling Lina's stories far and wide across every platform.</p></div>
+    </div>
+  </div>
+</section>
+<section class="section listen" id="listen">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">🎧 Listen</span>
+      <h2>Saan Makinig?<br/><small>Where to Listen</small></h2>
+    </div>
+    <div class="platforms-grid">
+      <a href="#" class="platform-card spotify"><div class="platform-icon">🎵</div><span>Spotify</span></a>
+      <a href="#" class="platform-card apple"><div class="platform-icon">🎵</div><span>Apple Podcasts</span></a>
+      <a href="#" class="platform-card google"><div class="platform-icon">▶️</div><span>YouTube</span></a>
+      <a href="#" class="platform-card amazon"><div class="platform-icon">🎙️</div><span>Amazon Music</span></a>
+      <a href="#" class="platform-card pocket"><div class="platform-icon">📻</div><span>Pocket Casts</span></a>
+      <a href="#" class="platform-card rss"><div class="platform-icon">📡</div><span>RSS Feed</span></a>
+    </div>
+    <div class="newsletter-box">
+      <h3>🔔 Subscribe for Updates</h3>
+      <p>Be the first to know when new episodes drop!</p>
+      <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+        <input type="email" placeholder="Your email address / Email mo" required/>
+        <button type="submit" class="btn btn-primary">Subscribe!</button>
+      </form>
+      <div id="subscribe-msg" class="success-msg" style="display:none">🌺 Salamat! Thank you for subscribing!</div>
+    </div>
+  </div>
+</section>
+<section class="section sponsor">
+  <div class="container">
+    <div class="sponsor-banner">
+      <div class="sponsor-text">
+        <span class="section-badge">💼 Partner with Us</span>
+        <h2>Maging Sponsor!<br/><small>Become a Sponsor</small></h2>
+        <p>Reach a passionate, engaged Filipino audience. Let's grow together!</p>
+        <a href="#contact" class="btn btn-primary">📧 Get in Touch</a>
+      </div>
+      <div class="sponsor-art">💰✨🤝</div>
+    </div>
+  </div>
+</section>
+<section class="section contact" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">📬 Contact</span>
+      <h2>Makipag-ugnayan<br/><small>Get in Touch</small></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item"><span>📧</span>
