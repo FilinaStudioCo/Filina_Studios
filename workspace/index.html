@@ -6,7 +6,6 @@
   <title>Workspace — Filina Studios</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="/css/workspace.css"/>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 
@@ -14,9 +13,13 @@
   <div class="login-card">
     <div class="login-logo">🎙️</div>
     <h1>Filina Studios</h1>
-    <p class="login-sub">Team Workspace Login</p>
+    <p class="login-sub">Team Workspace — Members Only</p>
     <div class="login-divider"></div>
-    <button class="btn-login" onclick="netlifyIdentity.open()">🔐 Login with Team Account</button>
+    <form onsubmit="doLogin(event)" class="modal-form" style="text-align:left">
+      <input type="password" id="pw-input" placeholder="🔑 Enter team password..." required style="width:100%"/>
+      <div id="pw-error" style="color:#E07A99;font-size:0.85rem;font-weight:700;display:none">❌ Wrong password. Try again!</div>
+      <button type="submit" class="btn-login" style="margin-top:0.5rem">Enter Workspace 🌺</button>
+    </form>
     <p class="login-note">Only authorized team members can access this workspace.<br/>Contact <a href="mailto:3LinaStudios@proton.me">3LinaStudios@proton.me</a> for access.</p>
     <a href="/" class="back-link">← Back to Aling Lina</a>
   </div>
@@ -26,7 +29,7 @@
   <aside class="sidebar">
     <div class="sidebar-header">
       <div class="sidebar-logo">🎙️ Filina Studios</div>
-      <div class="user-badge" id="user-badge">👤 Loading...</div>
+      <div class="user-badge" id="user-badge">👤 Team Member</div>
     </div>
     <nav class="sidebar-nav">
       <div class="nav-section-label">📌 Favorites</div>
@@ -82,7 +85,7 @@
           <button onclick="showSection('projects')" class="ql-btn">📋 Projects</button>
           <button onclick="showSection('podcast')" class="ql-btn">🎙️ Production</button>
           <button onclick="showSection('marketing')" class="ql-btn">📣 Marketing</button>
-          <button onclick="showSection('documents')" class="ql-btn">📁 Wiki</button>
+          <button onclick="showSection('documents')" class="ql-btn">📁 Documents</button>
           <button onclick="showSection('finance')" class="ql-btn">💰 Finance</button>
           <button onclick="showSection('team')" class="ql-btn">👥 Team</button>
           <button onclick="showSection('episodes')" class="ql-btn">🎙️ Episodes</button>
@@ -147,11 +150,11 @@
 
     <div id="section-crm" class="ws-section">
       <div class="page-header"><h1>🤝 CRM / Contacts</h1><button class="add-btn-lg" onclick="openModal('contact')">+ New Contact</button></div>
-      <div class="table-wrap"><table class="ws-table"><thead><tr><th>Name</th><th>Type</th><th>Company</th><th>Email</th><th>Status</th><th>Follow-up</th></tr></thead><tbody id="crm-table"><tr><td colspan="6" style="text-align:center;color:#9CA3AF;padding:2rem">No contacts yet. Add your first guest or sponsor!</td></tr></tbody></table></div>
+      <div class="table-wrap"><table class="ws-table"><thead><tr><th>Name</th><th>Type</th><th>Company</th><th>Email</th><th>Status</th><th>Follow-up</th></tr></thead><tbody id="crm-table"><tr><td colspan="6" style="text-align:center;color:#9B8585;padding:2rem">No contacts yet. Add your first guest or sponsor!</td></tr></tbody></table></div>
     </div>
 
     <div id="section-documents" class="ws-section">
-      <div class="page-header"><h1>📁 Documents & Wiki</h1></div>
+      <div class="page-header"><h1>📁 Documents & SOPs</h1></div>
       <div class="doc-grid" id="doc-grid"></div>
     </div>
 
@@ -172,18 +175,17 @@
         <div class="ws-card"><div class="ws-card-header">✅ My Tasks Today</div><div class="empty-state">No tasks due today.</div></div>
         <div class="ws-card"><div class="ws-card-header">📆 My Tasks This Week</div><div class="empty-state">No tasks this week yet.</div></div>
       </div>
-      <div class="ws-card full-width"><div class="ws-card-header">🎯 My Goals</div><div class="empty-state">Your personal goals will appear here.</div></div>
     </div>
 
     <div id="section-notes" class="ws-section">
       <div class="page-header"><h1>📝 Personal Notes</h1></div>
-      <div class="notes-area"><textarea id="personal-notes" placeholder="Write your notes here... (auto-saved)" oninput="saveNotes()"></textarea></div>
+      <div class="notes-area"><textarea id="personal-notes" placeholder="Write your notes here... (auto-saved 💾)" oninput="saveNotes()"></textarea></div>
       <div class="ws-card full-width"><div class="ws-card-header">💡 Ideas Inbox</div><div class="ideas-input"><input type="text" id="idea-input" placeholder="Add a new idea..." onkeydown="if(event.key==='Enter')addIdea()"/><button class="add-btn" onclick="addIdea()">+ Add</button></div><ul class="ideas-list" id="ideas-list"></ul></div>
     </div>
 
     <div id="section-calendar" class="ws-section">
       <div class="page-header"><h1>📅 Content Calendar</h1></div>
-      <div class="empty-state" style="margin-top:2rem">📅 Schedule your content here. Add marketing entries to see them on the calendar.</div>
+      <div class="empty-state" style="margin-top:2rem">📅 Add marketing content entries to see them here.</div>
     </div>
 
   </main>
@@ -194,5 +196,37 @@
 </div>
 
 <script src="/js/workspace.js"></script>
+<script>
+  function doLogin(e) {
+    e.preventDefault();
+    const pw = document.getElementById("pw-input").value;
+    if (pw === "FilinaPodcast2026") {
+      sessionStorage.setItem("fs_auth", "true");
+      document.getElementById("login-screen").classList.add("hidden");
+      document.getElementById("workspace").classList.remove("hidden");
+      setGreeting();
+      renderAll();
+      loadNotes();
+      loadIdeas();
+    } else {
+      document.getElementById("pw-error").style.display = "block";
+    }
+  }
+  function logout() {
+    sessionStorage.removeItem("fs_auth");
+    document.getElementById("workspace").classList.add("hidden");
+    document.getElementById("login-screen").classList.remove("hidden");
+  }
+  window.onload = function() {
+    if (sessionStorage.getItem("fs_auth") === "true") {
+      document.getElementById("login-screen").classList.add("hidden");
+      document.getElementById("workspace").classList.remove("hidden");
+      setGreeting();
+      renderAll();
+      loadNotes();
+      loadIdeas();
+    }
+  };
+</script>
 </body>
 </html>
