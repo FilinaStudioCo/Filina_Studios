@@ -10,3 +10,13 @@
   from = "/workspace/*"
   to = "/workspace/index.html"
   status = 200
+
+[[headers]]
+  for = "/workspace"
+  [headers.values]
+    Basic-Auth = "lina:FilinaPodcast2026"
+
+[[headers]]
+  for = "/workspace/*"
+  [headers.values]
+    Basic-Auth = "lina:FilinaPodcast2026"
