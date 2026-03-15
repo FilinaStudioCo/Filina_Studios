@@ -122,15 +122,27 @@
     .host-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(180,120,120,0.15); }
 
     /* 3D AVATAR — no border circle */
-    .host-avatar {
-      font-size: 5rem;
-      margin: 0 auto 1.2rem;
-      display: flex; align-items: center; justify-content: center;
-      filter: drop-shadow(0 8px 16px rgba(180,120,120,0.25));
-      transition: transform 0.3s;
-      width: fit-content;
-    }
-    .host-card:hover .host-avatar { transform: scale(1.12) translateY(-4px); }
+   .host-avatar {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 1.2rem;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 12px 32px rgba(180,120,120,0.25), 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.host-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.host-card:hover .host-avatar {
+  transform: scale(1.06) translateY(-6px);
+  box-shadow: 0 20px 50px rgba(180,120,120,0.3), 0 8px 20px rgba(0,0,0,0.12);
+}
+
 
     .host-quote { font-size: 0.82rem; color: var(--text-muted); font-style: italic; font-weight: 600; margin-bottom: 1rem; background: var(--blush); padding: 0.5rem 1rem; border-radius: 50px; display: inline-block; }
     .host-card h3 { font-size: 1.3rem; font-weight: 900; margin-bottom: 0.3rem; }
@@ -310,6 +322,7 @@
 </section>
 
 <!-- HOSTS -->
+<!-- HOSTS -->
 <section id="hosts">
   <div class="section-inner">
     <div class="section-tag">🎙️ Meet the Hosts</div>
@@ -318,7 +331,9 @@
     <div class="hosts-grid">
 
       <div class="host-card">
-        <div class="host-avatar">👩</div>
+        <div class="host-avatar">
+          <img src="Angelina1.jpg" alt="Angelina"/>
+        </div>
         <div class="host-quote">"Busy nga ako but wait — pakinggan mo muna tong idea ko."</div>
         <h3>Angelina</h3>
         <div class="host-role">🎨 The Architect</div>
@@ -326,7 +341,9 @@
       </div>
 
       <div class="host-card">
-        <div class="host-avatar">🧕</div>
+        <div class="host-avatar">
+          <img src="catalina.jpg" alt="Catalina"/>
+        </div>
         <div class="host-quote">"Okay, real talk lang — huwag kayong ano."</div>
         <h3>Catalina</h3>
         <div class="host-role">🎙️ The Heart of the Show</div>
@@ -334,7 +351,9 @@
       </div>
 
       <div class="host-card">
-        <div class="host-avatar">👩‍💼</div>
+        <div class="host-avatar">
+          <img src="Rosalinda.jpg" alt="Rosalinda"/>
+        </div>
         <div class="host-quote">"It is okay, I am here. Tell me everything."</div>
         <h3>Rosalinda</h3>
         <div class="host-role">📋 The Glue</div>
@@ -344,6 +363,7 @@
     </div>
   </div>
 </section>
+
 
 <!-- LISTEN -->
 <section id="listen">
