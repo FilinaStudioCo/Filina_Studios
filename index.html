@@ -122,9 +122,9 @@
     .host-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(180,120,120,0.15); }
 
     /* 3D AVATAR — no border circle */
- .host-avatar {
-  width: 180px;
-  height: 220px;
+.host-avatar {
+  width: 200px;
+  height: auto;
   margin: 0 auto 1.2rem;
   overflow: hidden;
   border-radius: 20px;
@@ -133,17 +133,14 @@
 }
 .host-avatar img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
+  height: auto;
   display: block;
+  border-radius: 20px;
 }
 .host-card:hover .host-avatar {
   transform: scale(1.06) translateY(-6px);
   box-shadow: 0 20px 50px rgba(180,120,120,0.3), 0 8px 20px rgba(0,0,0,0.12);
 }
-
-
 
     /* SPEECH BUBBLE */
 .host-bubble {
@@ -182,6 +179,23 @@
   font-weight: 700;
   line-height: 1.5;
 }
+    /* TYPING INDICATOR */
+.typing-dots {
+  display: flex; align-items: center; justify-content: center;
+  gap: 5px; padding: 0.3rem 0; margin-bottom: 0.4rem;
+}
+.typing-dots span {
+  width: 8px; height: 8px; background: var(--rose);
+  border-radius: 50%; display: inline-block;
+  animation: bounce 1.2s infinite ease-in-out;
+}
+.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0.7); opacity: 0.5; }
+  40%           { transform: scale(1.2); opacity: 1; }
+}
+
 
     .host-card h3 { font-size: 1.3rem; font-weight: 900; margin-bottom: 0.3rem; }
     .host-role { font-size: 0.8rem; font-weight: 800; color: var(--rose-dark); background: var(--blush); padding: 0.3rem 0.9rem; border-radius: 50px; display: inline-block; margin-bottom: 1rem; }
@@ -374,8 +388,11 @@
         <h3>Angelina</h3>
         <div class="host-role">🎨 The Architect</div>
         <div class="host-bubble">
-          <div class="bubble-text">"Busy nga ako but wait — pakinggan mo muna tong idea ko."</div>
-        </div>
+  <div class="typing-dots">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="bubble-text">"Busy nga ako but wait — pakinggan mo muna tong idea ko."</div>
+</div>
         <p>If you tell her she cannot do it — she will do it. Lahat. Website, logo, music, research, business reports — name it, kaya niya. Kapag sinabi niyang wala na siyang time, that is your sign na may bagong idea siyang paparating — and she will still do it anyway. We do not know how. We stopped asking. 💪✨</p>
       </div>
 
@@ -386,8 +403,11 @@
         <h3>Catalina</h3>
         <div class="host-role">🎙️ The Heart of the Show</div>
         <div class="host-bubble">
-          <div class="bubble-text">"Okay, real talk lang — huwag kayong ano."</div>
-        </div>
+  <div class="typing-dots">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="bubble-text">"Okay, real talk lang — huwag kayong ano."</div>
+</div>
         <p>She has been through a lot — and she is still standing. That is exactly why her stories hit different. Minsan hindi mo alam kung iiyak ka o matatawa — and honestly, both is fine. When Catalina shares something, you will feel it in your chest. Yung tipong "hindi ako nag-iisa pala." Yun siya. 🌧️🔥</p>
       </div>
 
@@ -398,8 +418,11 @@
         <h3>Rosalinda</h3>
         <div class="host-role">📋 The Glue</div>
         <div class="host-bubble">
-          <div class="bubble-text">"It is okay, I am here. Tell me everything."</div>
-        </div>
+  <div class="typing-dots">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="bubble-text">"It is okay, I am here. Tell me everything."</div>
+</div>
         <p>Walang masamang sasabihin si Rosalinda — kahit deserve mo pa. She is the most patient, the most organized, and honestly the kindest one in this group. She keeps the schedule, the peace, and sometimes our sanity. Kung may gulo, siya ang hahanapin mo. Bes ng bawat isa. 🏆🤍</p>
       </div>
 
