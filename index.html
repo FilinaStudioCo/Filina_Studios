@@ -122,9 +122,9 @@
     .host-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(180,120,120,0.15); }
 
     /* 3D AVATAR — no border circle */
-   .host-avatar {
-  width: 160px;
-  height: 160px;
+ .host-avatar {
+  width: 180px;
+  height: 220px;
   margin: 0 auto 1.2rem;
   overflow: hidden;
   border-radius: 20px;
@@ -144,7 +144,45 @@
 }
 
 
-    .host-quote { font-size: 0.82rem; color: var(--text-muted); font-style: italic; font-weight: 600; margin-bottom: 1rem; background: var(--blush); padding: 0.5rem 1rem; border-radius: 50px; display: inline-block; }
+
+    /* SPEECH BUBBLE */
+.host-bubble {
+  position: relative;
+  background: var(--white);
+  border: 1.5px solid var(--blush);
+  border-radius: 18px;
+  padding: 0.9rem 1.1rem;
+  margin: 0.8rem 0 1rem;
+  box-shadow: 0 4px 16px rgba(180,120,120,0.08);
+}
+.host-bubble::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 10px 12px 10px;
+  border-style: solid;
+  border-color: transparent transparent var(--blush) transparent;
+}
+.host-bubble::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 9px 11px 9px;
+  border-style: solid;
+  border-color: transparent transparent var(--white) transparent;
+}
+.bubble-text {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
     .host-card h3 { font-size: 1.3rem; font-weight: 900; margin-bottom: 0.3rem; }
     .host-role { font-size: 0.8rem; font-weight: 800; color: var(--rose-dark); background: var(--blush); padding: 0.3rem 0.9rem; border-radius: 50px; display: inline-block; margin-bottom: 1rem; }
     .host-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; font-weight: 600; }
@@ -322,7 +360,6 @@
 </section>
 
 <!-- HOSTS -->
-<!-- HOSTS -->
 <section id="hosts">
   <div class="section-inner">
     <div class="section-tag">🎙️ Meet the Hosts</div>
@@ -334,9 +371,11 @@
         <div class="host-avatar">
           <img src="Angelina1.jpg" alt="Angelina"/>
         </div>
-        <div class="host-quote">"Busy nga ako but wait — pakinggan mo muna tong idea ko."</div>
         <h3>Angelina</h3>
         <div class="host-role">🎨 The Architect</div>
+        <div class="host-bubble">
+          <div class="bubble-text">"Busy nga ako but wait — pakinggan mo muna tong idea ko."</div>
+        </div>
         <p>If you tell her she cannot do it — she will do it. Lahat. Website, logo, music, research, business reports — name it, kaya niya. Kapag sinabi niyang wala na siyang time, that is your sign na may bagong idea siyang paparating — and she will still do it anyway. We do not know how. We stopped asking. 💪✨</p>
       </div>
 
@@ -344,9 +383,11 @@
         <div class="host-avatar">
           <img src="catalina.jpg" alt="Catalina"/>
         </div>
-        <div class="host-quote">"Okay, real talk lang — huwag kayong ano."</div>
         <h3>Catalina</h3>
         <div class="host-role">🎙️ The Heart of the Show</div>
+        <div class="host-bubble">
+          <div class="bubble-text">"Okay, real talk lang — huwag kayong ano."</div>
+        </div>
         <p>She has been through a lot — and she is still standing. That is exactly why her stories hit different. Minsan hindi mo alam kung iiyak ka o matatawa — and honestly, both is fine. When Catalina shares something, you will feel it in your chest. Yung tipong "hindi ako nag-iisa pala." Yun siya. 🌧️🔥</p>
       </div>
 
@@ -354,16 +395,17 @@
         <div class="host-avatar">
           <img src="Rosalinda.jpg" alt="Rosalinda"/>
         </div>
-        <div class="host-quote">"It is okay, I am here. Tell me everything."</div>
         <h3>Rosalinda</h3>
         <div class="host-role">📋 The Glue</div>
+        <div class="host-bubble">
+          <div class="bubble-text">"It is okay, I am here. Tell me everything."</div>
+        </div>
         <p>Walang masamang sasabihin si Rosalinda — kahit deserve mo pa. She is the most patient, the most organized, and honestly the kindest one in this group. She keeps the schedule, the peace, and sometimes our sanity. Kung may gulo, siya ang hahanapin mo. Bes ng bawat isa. 🏆🤍</p>
       </div>
 
     </div>
   </div>
 </section>
-
 
 <!-- LISTEN -->
 <section id="listen">
