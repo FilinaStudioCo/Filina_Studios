@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+html_code = """<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -8,6 +9,7 @@
   <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
+
 <nav class="navbar">
   <div class="nav-container">
     <a href="/" class="nav-logo">🎙️ <span>Filina Studios</span></a>
@@ -28,7 +30,7 @@
     <div class="hero-badge">🌺 Bagong Podcast Alert!</div>
     <h1 class="hero-title">Aling Lina</h1>
     <p class="hero-tagline">Home of Aling Lina Podcast — where ideas become episodes.</p>
-    <p class="hero-sub">Kwento. Tawa. Katotohanan. — Stories, Laughs & Real Talk</p>
+    <p class="hero-sub">Kwento. Tawa. Katotohanan. — Stories, Laughs &amp; Real Talk</p>
     <div class="hero-buttons">
       <a href="#listen" class="btn btn-primary">🎧 Makinig Na / Listen Now</a>
       <a href="#episodes" class="btn btn-secondary">📻 All Episodes</a>
@@ -56,9 +58,21 @@
       <h2>Ano ang Aling Lina?<br/><small>What is Aling Lina?</small></h2>
     </div>
     <div class="about-grid">
-      <div class="about-card"><div class="about-icon">🌺</div><h3>Our Story</h3><p>Born from late-night conversations and big dreams, Aling Lina is a podcast by Filina Studios — a passionate 3-person team dedicated to creating authentic, entertaining, and meaningful content.</p></div>
-      <div class="about-card"><div class="about-icon">🎯</div><h3>Mission / Misyon</h3><p>To create a space where real stories are told with heart, humor, and honesty — celebrating Filipino culture, experiences, and voices from all walks of life.</p></div>
-      <div class="about-card"><div class="about-icon">✨</div><h3>What to Expect</h3><p>From hilarious personal stories to deep meaningful conversations — every episode of Aling Lina feels like sitting down with your favorite tita over coffee.</p></div>
+      <div class="about-card">
+        <div class="about-icon">🌺</div>
+        <h3>Our Story</h3>
+        <p>Born from late-night conversations and big dreams, Aling Lina is a podcast by Filina Studios — a passionate 3-person team dedicated to creating authentic, entertaining, and meaningful content.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">🎯</div>
+        <h3>Mission / Misyon</h3>
+        <p>To create a space where real stories are told with heart, humor, and honesty — celebrating Filipino culture, experiences, and voices from all walks of life.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">✨</div>
+        <h3>What to Expect</h3>
+        <p>From hilarious personal stories to deep meaningful conversations — every episode of Aling Lina feels like sitting down with your favorite tita over coffee.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -82,32 +96,71 @@
   </div>
 </section>
 
-<section id="hosts">
-  <h2>Ang Aming mga Host<br>Meet the Hosts</h2>
+<section class="section hosts-section" id="hosts">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">🎙️ Meet the Hosts</span>
+      <h2>Ang Aming mga Host<br/><small>The Faces Behind the Mic</small></h2>
+    </div>
+    <div class="hosts-stage">
 
-  <div class="host-card">
-    <img src="angelina.jpg" alt="Angelina" style="width:200px; border-radius:50%; display:block; margin:0 auto 15px;">
-    <h3>Angelina</h3>
-    <span>🎙️ Host</span>
-    <p>The heart of every conversation. Warm, curious, and always ready with the perfect question to get the story flowing.</p>
+      <!-- ANGELINA -->
+      <div class="host-bubble-card" id="host-angelina">
+        <div class="speech-bubble bubble-angelina" id="bubble-angelina">
+          💬 "Busy nga ako but wait — pakinggan mo muna tong idea ko."
+        </div>
+        <div class="avatar-wrapper">
+          <img src="Angelina1.jpg" alt="Angelina" class="host-avatar-img avatar-angelina" />
+          <div class="talking-indicator" id="talking-angelina">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+        <div class="host-info">
+          <h3>Angelina</h3>
+          <span class="section-badge">🎨 The Architect</span>
+          <p>If you tell her she cannot do it — she will do it. Lahat. Website, logo, music, research, business reports — name it, kaya niya. Kapag sinabi niyang wala na siyang time, that is your sign na may bagong idea siyang paparating — and she will still do it anyway. We do not know how. We stopped asking. 💪✨</p>
+        </div>
+      </div>
+
+      <!-- CATALINA -->
+      <div class="host-bubble-card host-center" id="host-catalina">
+        <div class="speech-bubble bubble-catalina" id="bubble-catalina">
+          💬 "Okay, real talk lang — huwag kayong ano."
+        </div>
+        <div class="avatar-wrapper">
+          <img src="catalina.jpg" alt="Catalina" class="host-avatar-img avatar-catalina" />
+          <div class="talking-indicator" id="talking-catalina">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+        <div class="host-info">
+          <h3>Catalina</h3>
+          <span class="section-badge">🎙️ The Heart of the Show</span>
+          <p>She has been through a lot — and she is still standing. That is exactly why her stories hit different. Minsan hindi mo alam kung iiyak ka o matatawa — and honestly, both is fine. When Catalina shares something, you will feel it in your chest. Yung tipong "hindi ako nag-iisa pala." Yun siya. 🌧️🔥</p>
+        </div>
+      </div>
+
+      <!-- ROSALINDA -->
+      <div class="host-bubble-card" id="host-rosalinda">
+        <div class="speech-bubble bubble-rosalinda" id="bubble-rosalinda">
+          💬 "It is okay, I am here. Tell me everything."
+        </div>
+        <div class="avatar-wrapper">
+          <img src="Rosalinda.jpg" alt="Rosalinda" class="host-avatar-img avatar-rosalinda" />
+          <div class="talking-indicator" id="talking-rosalinda">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+        <div class="host-info">
+          <h3>Rosalinda</h3>
+          <span class="section-badge">📋 The Glue</span>
+          <p>Walang masamang sasabihin si Rosalinda — kahit deserve mo pa. She is the most patient, the most organized, and honestly the kindest one in this group. She keeps the schedule, the peace, and sometimes our sanity. Kung may gulo, siya ang hahanapin mo. Bes ng bawat isa — and we all know she is the real reason this podcast exists. 🏆🤍</p>
+        </div>
+      </div>
+
+    </div>
   </div>
-
-  <div class="host-card">
-    <img src="catalina.jpg" alt="Catalina" style="width:200px; border-radius:50%; display:block; margin:0 auto 15px;">
-    <h3>Catalina</h3>
-    <span>🎙️ Host & Tech Lead</span>
-    <p>The brains behind the sound. Keeps everything running smoothly so the magic — and the laughter — can happen.</p>
-  </div>
-
-  <div class="host-card">
-    <img src="rosalinda.jpg" alt="Rosalinda" style="width:200px; border-radius:50%; display:block; margin:0 auto 15px;">
-    <h3>Rosalinda</h3>
-    <span>🎙️ Host & Creative Lead</span>
-    <p>The creative soul spreading Aling Lina's stories far and wide — with passion, humor, and a whole lot of heart.</p>
-  </div>
-
 </section>
-
 
 <section class="section listen" id="listen">
   <div class="container">
@@ -158,9 +211,28 @@
     </div>
     <div class="contact-grid">
       <div class="contact-info">
-        <div class="contact-item"><span>📧</span><div><strong>Email Us</strong><p>Send us a message directly!</p><a href="mailto:3LinaStudios@proton.me" class="social-btn" style="margin-top:0.5rem;display:inline-block">📧 Send Email</a></div></div>
-        <div class="contact-item"><span>🎙️</span><div><strong>Guest Appearances</strong><p>Want to be on the show? Email us!</p></div></div>
-        <div class="contact-item"><span>💼</span><div><strong>Sponsorships</strong><p>Interested in advertising? Let's talk!</p></div></div>
+        <div class="contact-item">
+          <span>📧</span>
+          <div>
+            <strong>Email Us</strong>
+            <p>Send us a message directly!</p>
+            <a href="mailto:3LinaStudios@proton.me" class="social-btn" style="margin-top:0.5rem;display:inline-block">📧 Send Email</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span>🎙️</span>
+          <div>
+            <strong>Guest Appearances</strong>
+            <p>Want to be on the show? Email us!</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span>💼</span>
+          <div>
+            <strong>Sponsorships</strong>
+            <p>Interested in advertising? Let's talk!</p>
+          </div>
+        </div>
         <div class="social-links">
           <a href="#" class="social-btn">📷 Instagram</a>
           <a href="#" class="social-btn">🎵 TikTok</a>
@@ -191,14 +263,45 @@
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand"><div class="footer-logo">🎙️ Filina Studios</div><p>Home of Aling Lina Podcast.</p><p><a href="mailto:3LinaStudios@proton.me">3LinaStudios@proton.me</a></p></div>
-      <div class="footer-links"><h4>Quick Links</h4><a href="#about">About</a><a href="#episodes">Episodes</a><a href="#hosts">Hosts</a><a href="#listen">Listen</a><a href="#contact">Contact</a></div>
-      <div class="footer-links"><h4>Listen On</h4><a href="#">Spotify</a><a href="#">Apple Podcasts</a><a href="#">YouTube</a><a href="#">Amazon Music</a></div>
-      <div class="footer-links"><h4>Follow Us</h4><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Twitter/X</a><a href="#">Facebook</a></div>
+      <div class="footer-brand">
+        <div class="footer-logo">🎙️ Filina Studios</div>
+        <p>Home of Aling Lina Podcast.</p>
+        <p><a href="mailto:3LinaStudios@proton.me">3LinaStudios@proton.me</a></p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="#about">About</a>
+        <a href="#episodes">Episodes</a>
+        <a href="#hosts">Hosts</a>
+        <a href="#listen">Listen</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-links">
+        <h4>Listen On</h4>
+        <a href="#">Spotify</a>
+        <a href="#">Apple Podcasts</a>
+        <a href="#">YouTube</a>
+        <a href="#">Amazon Music</a>
+      </div>
+      <div class="footer-links">
+        <h4>Follow Us</h4>
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+        <a href="#">Twitter/X</a>
+        <a href="#">Facebook</a>
+      </div>
     </div>
-    <div class="footer-bottom"><p>© 2026 Filina Studios. All rights reserved. Made with 💜 and ☕</p><a href="/workspace" class="footer-admin">Team Login</a></div>
+    <div class="footer-bottom">
+      <p>© 2026 Filina Studios. All rights reserved. Made with 💜 and ☕</p>
+      <a href="/workspace" class="footer-admin">Team Login</a>
+    </div>
   </div>
 </footer>
+
 <script src="js/main.js"></script>
 </body>
-</html>
+</html>"""
+
+with open("index_FINAL.html", "w", encoding="utf-8") as f:
+    f.write(html_code)
+print("index_FINAL.html saved! length:", len(html_code))
