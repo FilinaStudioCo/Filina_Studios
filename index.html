@@ -112,83 +112,94 @@
     .episode-coming p  { color: var(--text-muted); font-size: 0.9rem; font-weight: 600; margin-bottom: 1.5rem; }
 
     /* HOSTS */
-    #hosts { background: var(--white); }
-    .hosts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-    .host-card {
-      background: linear-gradient(160deg, #FFF5F8, #FFF0E8);
-      border-radius: 24px; padding: 2.5rem 2rem; text-align: center;
-      border: 1.5px solid var(--blush); transition: all 0.3s;
-    }
-    .host-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(180,120,120,0.15); }
+#hosts { background: var(--white); }
+.hosts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+.host-card {
+  border-radius: 24px; padding: 2.5rem 2rem;
+  border: 1.5px solid var(--blush); transition: all 0.3s;
+  display: flex; flex-direction: column; align-items: center;
+}
+.host-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(180,120,120,0.15); }
+.host-card:nth-child(1) { background: linear-gradient(160deg, #FFF0F5, #FFE8F0); }
+.host-card:nth-child(2) { background: linear-gradient(160deg, #F0F0FF, #E8E8FF); }
+.host-card:nth-child(3) { background: linear-gradient(160deg, #F0FFF8, #E8FFF2); }
 
-    /* 3D AVATAR — no border circle */
 .host-avatar {
-  width: 200px;
-  height: auto;
-  margin: 0 auto 1.2rem;
-  overflow: hidden;
-  border-radius: 20px;
+  width: 200px; height: auto; margin: 0 auto 1.2rem;
+  overflow: hidden; border-radius: 20px;
   box-shadow: 0 12px 32px rgba(180,120,120,0.25), 0 4px 12px rgba(0,0,0,0.1);
   transition: transform 0.3s, box-shadow 0.3s;
 }
-.host-avatar img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 20px;
-}
+.host-avatar img { width: 100%; height: auto; display: block; border-radius: 20px; }
 .host-card:hover .host-avatar {
   transform: scale(1.06) translateY(-6px);
   box-shadow: 0 20px 50px rgba(180,120,120,0.3), 0 8px 20px rgba(0,0,0,0.12);
 }
 
-    /* SPEECH BUBBLE */
+/* Center: name, role, bubble */
+.host-card h3 {
+  font-size: 1.3rem; font-weight: 900; margin-bottom: 0.3rem;
+  text-align: center; width: 100%;
+}
+.host-role {
+  font-size: 0.8rem; font-weight: 800;
+  padding: 0.3rem 0.9rem; border-radius: 50px;
+  display: inline-block; margin-bottom: 1rem; text-align: center;
+}
+.host-card:nth-child(1) .host-role { background: #FFD6E8; color: #C0446E; }
+.host-card:nth-child(2) .host-role { background: #D6D6FF; color: #5050C0; }
+.host-card:nth-child(3) .host-role { background: #D6FFE8; color: #1A8C4E; }
+
+/* Speech bubble — centered with arrow */
 .host-bubble {
-  position: relative;
-  background: var(--white);
-  border: 1.5px solid var(--blush);
-  border-radius: 18px;
-  padding: 0.9rem 1.1rem;
-  margin: 0.8rem 0 1rem;
-  box-shadow: 0 4px 16px rgba(180,120,120,0.08);
+  position: relative; border-radius: 18px;
+  padding: 0.9rem 1.1rem; margin: 0.8rem 0 1rem;
+  text-align: center; width: 100%;
 }
+.host-card:nth-child(1) .host-bubble { background: #FFF0F5; border: 1.5px solid #FFB3D1; box-shadow: 0 4px 16px rgba(255,100,150,0.1); }
+.host-card:nth-child(2) .host-bubble { background: #F0F0FF; border: 1.5px solid #B3B3FF; box-shadow: 0 4px 16px rgba(100,100,255,0.1); }
+.host-card:nth-child(3) .host-bubble { background: #F0FFF8; border: 1.5px solid #B3FFD6; box-shadow: 0 4px 16px rgba(0,180,100,0.1); }
+
 .host-bubble::before {
-  content: "";
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 0 10px 12px 10px;
-  border-style: solid;
-  border-color: transparent transparent var(--blush) transparent;
+  content: ""; position: absolute;
+  top: -12px; left: 50%; transform: translateX(-50%);
+  border-width: 0 10px 12px 10px; border-style: solid;
 }
+.host-card:nth-child(1) .host-bubble::before { border-color: transparent transparent #FFB3D1 transparent; }
+.host-card:nth-child(2) .host-bubble::before { border-color: transparent transparent #B3B3FF transparent; }
+.host-card:nth-child(3) .host-bubble::before { border-color: transparent transparent #B3FFD6 transparent; }
+
 .host-bubble::after {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 0 9px 11px 9px;
-  border-style: solid;
-  border-color: transparent transparent var(--white) transparent;
+  content: ""; position: absolute;
+  top: -10px; left: 50%; transform: translateX(-50%);
+  border-width: 0 9px 11px 9px; border-style: solid;
 }
+.host-card:nth-child(1) .host-bubble::after { border-color: transparent transparent #FFF0F5 transparent; }
+.host-card:nth-child(2) .host-bubble::after { border-color: transparent transparent #F0F0FF transparent; }
+.host-card:nth-child(3) .host-bubble::after { border-color: transparent transparent #F0FFF8 transparent; }
+
 .bubble-text {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  font-style: italic;
-  font-weight: 700;
-  line-height: 1.5;
+  font-size: 0.82rem; font-style: italic;
+  font-weight: 700; line-height: 1.5; color: var(--text-muted);
+  text-align: center;
 }
-    /* TYPING INDICATOR */
+
+/* Typing dots — centered */
 .typing-dots {
   display: flex; align-items: center; justify-content: center;
-  gap: 5px; padding: 0.3rem 0; margin-bottom: 0.4rem;
+  gap: 5px; padding: 0.2rem 0; margin-bottom: 0.4rem;
 }
 .typing-dots span {
-  width: 8px; height: 8px; background: var(--rose);
-  border-radius: 50%; display: inline-block;
-  animation: bounce 1.2s infinite ease-in-out;
+  width: 7px; height: 7px; border-radius: 50%;
+  display: inline-block; animation: bounce 1.2s infinite ease-in-out;
 }
+.host-card:nth-child(1) .typing-dots span { background: #E07A99; }
+.host-card:nth-child(2) .typing-dots span { background: #7A7AE0; }
+.host-card:nth-child(3) .typing-dots span { background: #2ECC71; }
 .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
 .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
 @keyframes bounce {
@@ -196,11 +207,12 @@
   40%           { transform: scale(1.2); opacity: 1; }
 }
 
-
-    .host-card h3 { font-size: 1.3rem; font-weight: 900; margin-bottom: 0.3rem; }
-    .host-role { font-size: 0.8rem; font-weight: 800; color: var(--rose-dark); background: var(--blush); padding: 0.3rem 0.9rem; border-radius: 50px; display: inline-block; margin-bottom: 1rem; }
-    .host-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; font-weight: 600; }
-
+/* Description text — left aligned, natural reading */
+.host-card p {
+  font-size: 0.88rem; color: var(--text-muted);
+  line-height: 1.7; font-weight: 600;
+  text-align: left; width: 100%;
+}
     /* LISTEN */
     #listen { background: linear-gradient(160deg, #F5F0FF, #FFF5F8); }
     .platforms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 3rem; }
