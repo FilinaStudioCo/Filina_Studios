@@ -578,6 +578,67 @@ function showSuccess(id) {
   var el = document.getElementById(id);
   if (el) { el.style.display = "block"; setTimeout(function(){ el.style.display = "none"; }, 4000); }
 }
+
+// ---- CHAT CONVERSATION EFFECT ----
+function initBubbles() {
+  var cards = document.querySelectorAll(".host-card");
+  var bubbles = [];
+  cards.forEach(function(card) {
+    var bubble = card.querySelector(".host-bubble");
+    if (bubble) {
+      bubble.style.opacity = "0";
+      bubble.style.transform = "translateY(10px) scale(0.95)";
+      bubble.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+      bubbles.push(bubble);
+    }
+  });
+
+  var current = 0;
+  var showDuration = 2800;  // how long bubble stays visible
+  var typingDuration = 900; // how long dots show before text appears
+
+  function showNext() {
+    // hide all first
+    bubbles.forEach(function(b) {
+      b.style.opacity = "0";
+      b.style.transform = "translateY(10px) scale(0.95)";
+      var txt = b.querySelector(".bubble-text");
+      var dots = b.querySelector(".typing-dots");
+      if (txt) txt.style.opacity = "0";
+      if (dots) dots.style.opacity = "1";
+    });
+
+    var bubble = bubbles[current];
+    if (!bubble) return;
+
+    var txt = bubble.querySelector(".bubble-text");
+    var dots = bubble.querySelector(".typing-dots");
+
+    // Step 1: show bubble with only dots
+    setTimeout(function() {
+      bubble.style.opacity = "1";
+      bubble.style.transform = "translateY(0) scale(1)";
+    }, 100);
+
+    // Step 2: hide dots, show text
+    setTimeout(function() {
+      if (dots) dots.style.opacity = "0";
+      if (txt) { txt.style.opacity = "1"; txt.style.transition = "opacity 0.4s ease"; }
+    }, 100 + typingDuration);
+
+    // Step 3: move to next
+    current = (current + 1) % bubbles.length;
+    setTimeout(showNext, showDuration);
+  }
+
+  // Start with a small delay
+  setTimeout(showNext, 600);
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  initBubbles();
+});
 </script>
+
 </body>
 </html>
