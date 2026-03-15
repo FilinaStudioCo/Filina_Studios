@@ -6,7 +6,7 @@
 
 // ---------- TEAM PASSWORD ----------
 // Change this to your actual team password!
-var TEAM_PASSWORD = "filinastudios2026";
+var TEAM_PASSWORD = "-20MarchNewGirl26-";
 
 // ---------- LOGIN ----------
 function doLogin() {
