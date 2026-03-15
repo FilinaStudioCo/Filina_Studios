@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Filina Studios — Team Workspace</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #FFF8F2; --blush: #FFD6D6; --peach: #FFBFA3; --peach-dark: #F4956A;
+      --rose: #F2A7BB; --rose-dark: #E07A99; --lilac: #D9C6F0; --lilac-dark: #9B7FC7;
+      --mint: #B8EAD8; --mint-dark: #5BBC96;
+      --text: #3D2C2C; --text-muted: #9B8585; --white: #FFFFFF;
+      --radius: 16px; --radius-sm: 10px;
+      --shadow: 0 4px 24px rgba(180,120,120,0.08);
+      --shadow-hover: 0 12px 40px rgba(180,120,120,0.15);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Nunito", sans-serif; background: #F3F4F6; color: var(--text); }
+    .hidden { display: none !important; }
+
+    /* LOGIN */
+    #login-screen {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(160deg, #FFF8F2, #FFE8EF, #F0E8FF);
+    }
+    .login-card {
+      background: var(--white); border-radius: 24px; padding: 3rem 2.5rem;
+      text-align: center; box-shadow: 0 8px 40px rgba(180,120,120,0.15);
+      border: 1.5px solid var(--blush); max-width: 420px; width: 100%;
+    }
+    .login-logo { font-size: 3rem; margin-bottom: 1rem; }
+    .login-card h1 { font-size: 1.6rem; font-weight: 900; color: var(--text); margin-bottom: 0.3rem; }
+    .login-card p  { color: var(--text-muted); margin-bottom: 1.8rem; font-size: 0.92rem; }
+    .login-card input {
+      width: 100%; padding: 0.85rem 1.2rem; border-radius: 50px;
+      border: 1.5px solid var(--blush); font-size: 0.95rem; font-family: inherit;
+      outline: none; background: var(--cream); color: var(--text);
+      margin-bottom: 0.8rem; transition: border-color 0.2s;
+    }
+    .login-card input:focus { border-color: var(--rose-dark); background: white; }
+    .login-btn {
+      width: 100%; background: linear-gradient(135deg, var(--rose), var(--peach));
+      color: var(--text); padding: 0.9rem; border-radius: 50px; font-weight: 800;
+      font-size: 1rem; cursor: pointer; border: none; font-family: inherit;
+      box-shadow: 0 4px 16px rgba(242,167,187,0.35); transition: all 0.3s;
+    }
+    .login-btn:hover { transform: translateY(-2px); }
+    .login-error { color: #EF4444; font-size: 0.82rem; font-weight: 700; margin-top: 0.8rem; display: none; }
+
+    /* WORKSPACE */
+    #workspace { display: flex; min-height: 100vh; }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 240px; min-height: 100vh; background: #3D2C2C;
+      display: flex; flex-direction: column; position: fixed;
+      top: 0; left: 0; z-index: 100; overflow-y: auto;
+    }
+    .sidebar-logo {
+      padding: 1.5rem 1.2rem 1rem; font-size: 1.05rem; font-weight: 900;
+      color: var(--peach); border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .sidebar-logo span { display: block; font-size: 0.78rem; color: #9B8585; font-weight: 600; margin-top: 0.1rem; }
+    .sidebar-nav { flex: 1; padding: 1rem 0; }
+    .nav-group-label {
+      font-size: 0.68rem; font-weight: 800; color: #6B7280;
+      text-transform: uppercase; letter-spacing: 0.08em; padding: 0.9rem 1.2rem 0.3rem;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 0.7rem; padding: 0.62rem 1.2rem;
+      color: #C4AEAE; font-size: 0.88rem; font-weight: 700; cursor: pointer;
+      transition: all 0.2s; border-left: 3px solid transparent;
+    }
+    .nav-item:hover { background: rgba(255,255,255,0.05); color: white; }
+    .nav-item.active { background: rgba(242,167,187,0.12); color: var(--rose); border-left-color: var(--rose); }
+    .nav-item .nav-icon { font-size: 1rem; width: 20px; text-align: center; }
+    .sidebar-footer { padding: 1rem 1.2rem; border-top: 1px solid rgba(255,255,255,0.08); }
+    .user-badge-side { font-size: 0.8rem; color: #9B8585; font-weight: 700; margin-bottom: 0.7rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .logout-btn {
+      width: 100%; padding: 0.5rem; background: rgba(242,167,187,0.12);
+      color: var(--rose); border: 1px solid rgba(242,167,187,0.2);
+      border-radius: var(--radius-sm); font-size: 0.82rem; font-weight: 700;
+      cursor: pointer; font-family: inherit; transition: all 0.2s;
+    }
+    .logout-btn:hover { background: rgba(242,167,187,0.22); }
+
+    /* MAIN */
+    .main-content { margin-left: 240px; flex: 1; padding: 2rem; min-height: 100vh; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+    .greeting-block h2 { font-size: 1.4rem; font-weight: 900; color: var(--text); }
+    .greeting-block p  { color: var(--text-muted); font-size: 0.88rem; margin-top: 0.2rem; }
+
+    /* SECTIONS */
+    .ws-section { display: none; }
+    .ws-section.active { display: block; }
+    .section-title { font-size: 1.5rem; font-weight: 900; color: var(--text); margin-bottom: 0.3rem; }
+    .section-desc  { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .section-toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 1.5rem; }
+
+    /* CARDS */
+    .card { background: var(--white); border-radius: var(--radius); padding: 1.5rem; border: 1.5px solid var(--blush); box-shadow: var(--shadow); margin-bottom: 1.5rem; }
+    .card-title { font-size: 1rem; font-weight: 900; color: var(--text); margin-bottom: 1rem; }
+
+    /* DASHBOARD STATS */
+    #dashboard-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .dash-stat-card { background: var(--white); border-radius: var(--radius); padding: 1.3rem 1rem; text-align: center; border: 1.5px solid var(--blush); box-shadow: var(--shadow); transition: all 0.3s; }
+    .dash-stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+    .dash-stat-icon  { font-size: 1.8rem; margin-bottom: 0.4rem; }
+    .dash-stat-value { font-size: 1.8rem; font-weight: 900; color: var(--rose-dark); }
+    .dash-stat-label { font-size: 0.78rem; color: var(--text-muted); font-weight: 700; margin-top: 0.2rem; }
+    .dash-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.5rem; }
+    .project-item { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid var(--blush); font-size: 0.88rem; font-weight: 700; }
+    .project-item:last-child { border-bottom: none; }
+
+    /* BUTTONS */
+    .add-btn {
+      background: linear-gradient(135deg, var(--rose), var(--peach));
+      color: var(--text); padding: 0.6rem 1.4rem; border-radius: 50px; font-weight: 800;
+      font-size: 0.88rem; cursor: pointer; border: none; font-family: inherit;
+      box-shadow: 0 2px 12px rgba(242,167,187,0.3); transition: all 0.3s; white-space: nowrap;
+    }
+    .add-btn:hover { transform: translateY(-2px); }
+    .add-btn-lg {
+      background: linear-gradient(135deg, var(--rose), var(--peach));
+      color: var(--text); padding: 0.75rem 2rem; border-radius: 50px; font-weight: 800;
+      font-size: 0.95rem; cursor: pointer; border: none; font-family: inherit; transition: all 0.3s;
+    }
+    .add-btn-lg:hover { transform: translateY(-2px); }
+    .btn-cancel {
+      background: #F3F4F6; color: var(--text-muted); padding: 0.75rem 1.5rem; border-radius: 50px;
+      font-weight: 800; font-size: 0.95rem; cursor: pointer; border: 1.5px solid #E5E7EB;
+      font-family: inherit; transition: all 0.2s;
+    }
+    .btn-cancel:hover { background: #E5E7EB; }
+    .row-btn { border: none; cursor: pointer; background: transparent; font-size: 0.85rem; padding: 0.25rem 0.4rem; border-radius: 6px; transition: background 0.2s; }
+    .edit-btn:hover { background: #FEF3C7; }
+    .del-btn:hover  { background: #FEE2E2; }
+
+    /* TABLE */
+    .table-wrap { overflow-x: auto; border-radius: var(--radius); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    thead th { background: var(--cream); padding: 0.75rem 1rem; text-align: left; font-weight: 800; color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1.5px solid var(--blush); }
+    tbody tr { border-bottom: 1px solid #F3F4F6; transition: background 0.15s; }
+    tbody tr:hover { background: #FFF8F2; }
+    tbody td { padding: 0.75rem 1rem; vertical-align: middle; }
+
+    /* BADGES */
+    .badge { display: inline-block; padding: 0.22rem 0.75rem; border-radius: 50px; font-size: 0.72rem; font-weight: 800; }
+    .badge-progress { background: #DBEAFE; color: #1D4ED8; }
+    .badge-planned  { background: #FEF3C7; color: #92400E; }
+    .badge-done     { background: #D1FAE5; color: #065F46; }
+    .badge-idea     { background: var(--lilac); color: #5B3F9B; }
+    .badge-urgent   { background: #FEE2E2; color: #991B1B; }
+    .badge-high     { background: #FFEDD5; color: #9A3412; }
+    .badge-medium   { background: #FEF9C3; color: #854D0E; }
+
+    /* FINANCE SUMMARY */
+    #finance-summary { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1rem; padding: 1rem 1.5rem; background: linear-gradient(135deg,#FFF5F8,#F5FFFA); border-radius: var(--radius-sm); border: 1.5px solid var(--blush); font-size: 0.9rem; font-weight: 700; }
+
+    /* GOALS */
+    .goal-item { margin-bottom: 1.2rem; }
+    .goal-header { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+    .goal-title { font-weight: 800; font-size: 0.92rem; flex: 1; }
+    .goal-meta  { font-size: 0.78rem; color: var(--text-muted); }
+    .progress-bar { background: #F3F4F6; border-radius: 50px; height: 10px; overflow: hidden; margin-bottom: 0.3rem; }
+    .progress-fill { height: 100%; border-radius: 50px; background: linear-gradient(90deg, var(--rose), var(--peach)); transition: width 0.6s ease; }
+    .goal-percent { font-size: 0.78rem; color: var(--text-muted); font-weight: 700; }
+
+    /* TEAM */
+    #team-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: 1.2rem; }
+    .team-member-card { background: linear-gradient(160deg,#FFF5F8,#FFF0E8); border-radius: var(--radius); padding: 1.5rem 1rem; text-align: center; border: 1.5px solid var(--blush); transition: all 0.3s; }
+    .team-member-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+    .member-avatar { font-size: 2.5rem; margin-bottom: 0.6rem; }
+    .team-member-card h3 { font-size: 1rem; font-weight: 900; color: var(--text); margin-bottom: 0.3rem; }
+    .member-role   { font-size: 0.78rem; color: var(--text-muted); font-weight: 700; margin-bottom: 0.4rem; }
+    .member-status { font-size: 0.75rem; color: var(--mint-dark); font-weight: 700; }
+
+    /* DOCUMENTS */
+    #doc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 1rem; }
+    .doc-card { background: var(--white); border-radius: var(--radius); padding: 1.3rem; border: 1.5px solid var(--blush); text-align: center; transition: all 0.3s; }
+    .doc-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+    .doc-type { font-size: 0.72rem; font-weight: 800; color: var(--lilac-dark); margin-bottom: 0.4rem; text-transform: uppercase; }
+    .doc-card h4 { font-size: 0.88rem; font-weight: 800; color: var(--text); margin-bottom: 0.3rem; }
+    .doc-card p  { font-size: 0.78rem; color: var(--text-muted); }
+
+    /* WIKI */
+    .wiki-section { margin-bottom: 1.5rem; }
+    .wiki-section h3 { font-size: 1rem; font-weight: 900; color: var(--text); margin-bottom: 0.6rem; }
+    .wiki-links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .wiki-link { background: var(--cream); border: 1.5px solid var(--blush); border-radius: 50px; padding: 0.3rem 0.9rem; font-size: 0.82rem; font-weight: 700; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+    .wiki-link:hover { background: var(--blush); color: var(--text); }
+
+    /* KANBAN */
+    #podcast-kanban { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem; }
+    .kanban-col { min-width: 160px; background: var(--cream); border-radius: var(--radius); padding: 1rem; border: 1.5px solid var(--blush); flex-shrink: 0; }
+    .kanban-col-title { font-size: 0.78rem; font-weight: 900; color: var(--text-muted); margin-bottom: 0.7rem; text-transform: uppercase; }
+    .kanban-card { background: var(--white); border-radius: var(--radius-sm); padding: 0.6rem 0.8rem; font-size: 0.8rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; border: 1px solid var(--blush); box-shadow: var(--shadow); }
+
+    /* NOTES & IDEAS */
+    #personal-notes { width: 100%; min-height: 240px; padding: 1rem; border-radius: var(--radius); border: 1.5px solid var(--blush); font-family: inherit; font-size: 0.9rem; color: var(--text); background: var(--cream); resize: vertical; outline: none; }
+    #personal-notes:focus { border-color: var(--rose-dark); background: white; }
+    .notes-save-btn { margin-top: 0.7rem; background: var(--mint); color: #065F46; border: none; border-radius: 50px; padding: 0.5rem 1.3rem; font-weight: 800; font-size: 0.85rem; cursor: pointer; font-family: inherit; }
+    .idea-input-row { display: flex; gap: 0.8rem; margin-bottom: 1rem; }
+    .idea-input-row input { flex: 1; padding: 0.7rem 1rem; border-radius: 50px; border: 1.5px solid var(--blush); font-family: inherit; font-size: 0.9rem; outline: none; background: var(--cream); color: var(--text); }
+    .idea-input-row input:focus { border-color: var(--rose-dark); background: white; }
+    #ideas-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    #ideas-list li { display: flex; align-items: center; gap: 0.5rem; background: var(--cream); padding: 0.6rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--blush); font-size: 0.88rem; font-weight: 700; }
+    #ideas-list li span:first-child { flex: 1; }
+    .del-idea { background: none; border: none; cursor: pointer; color: #EF4444; font-size: 0.8rem; font-weight: 900; padding: 0.1rem 0.3rem; border-radius: 4px; }
+    .del-idea:hover { background: #FEE2E2; }
+
+    /* MODAL */
+    #modal { position: fixed; inset: 0; background: rgba(61,44,44,0.45); backdrop-filter: blur(4px); z-index: 999; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+    #modal-content { background: var(--white); border-radius: var(--radius); padding: 2rem; max-width: 480px; width: 100%; box-shadow: 0 20px 60px rgba(61,44,44,0.2); border: 1.5px solid var(--blush); max-height: 90vh; overflow-y: auto; }
+    #modal-content h2 { font-size: 1.2rem; font-weight: 900; color: var(--text); margin-bottom: 1.2rem; }
+    .modal-form { display: flex; flex-direction: column; gap: 0.8rem; }
+    .modal-form input,
+    .modal-form select,
+    .modal-form textarea { padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1.5px solid var(--blush); font-size: 0.9rem; font-family: inherit; outline: none; background: var(--cream); color: var(--text); }
+    .modal-form input:focus,
+    .modal-form select:focus,
+    .modal-form textarea:focus { border-color: var(--rose-dark); background: white; }
+    .modal-form textarea { resize: vertical; min-height: 120px; }
+    .modal-actions { display: flex; gap: 0.8rem; margin-top: 0.5rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .sidebar { width: 100%; min-height: auto; position: relative; }
+      .main-content { margin-left: 0; padding: 1rem; }
+      .dash-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">🎙️</div>
+    <h1>Filina Studios</h1>
+    <p>Team Workspace — Members only.<br/>Enter your name and team password.</p>
+    <input type="text" id="login-name" placeholder="Your name (e.g. Angelina)" />
+    <input type="password" id="login-pass" placeholder="Team password"
+           onkeydown="if(event.key==='Enter') doLogin()" />
+    <button class="login-btn" onclick="doLogin()">🔐 Enter Workspace</button>
+    <div class="login-error" id="login-error">❌ Wrong password. Try again!</div>
+  </div>
+</div>
+
+<!-- WORKSPACE -->
+<div id="workspace" class="hidden">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">🎙️ Filina Studios<span>Team Workspace</span></div>
+    <nav class="sidebar-nav">
+      <div class="nav-group-label">Overview</div>
+      <div class="nav-item active" onclick="showSection('dashboard')"><span class="nav-icon">🏠</span> Dashboard</div>
+      <div class="nav-group-label">Podcast</div>
+      <div class="nav-item" onclick="showSection('episodes')"><span class="nav-icon">🎙️</span> Episodes</div>
+      <div class="nav-item" onclick="showSection('kanban')"><span class="nav-icon">📌</span> Episode Board</div>
+      <div class="nav-item" onclick="showSection('equipment')"><span class="nav-icon">🛠️</span> Equipment</div>
+      <div class="nav-group-label">Projects</div>
+      <div class="nav-item" onclick="showSection('projects')"><span class="nav-icon">📋</span> Projects</div>
+      <div class="nav-item" onclick="showSection('tasks')"><span class="nav-icon">✅</span> Tasks</div>
+      <div class="nav-item" onclick="showSection('goals')"><span class="nav-icon">🎯</span> Goals</div>
+      <div class="nav-group-label">Marketing</div>
+      <div class="nav-item" onclick="showSection('content')"><span class="nav-icon">📣</span> Content Calendar</div>
+      <div class="nav-item" onclick="showSection('contacts')"><span class="nav-icon">🤝</span> Contacts & Guests</div>
+      <div class="nav-group-label">Finance & Team</div>
+      <div class="nav-item" onclick="showSection('finance')"><span class="nav-icon">💰</span> Finance</div>
+      <div class="nav-item" onclick="showSection('team')"><span class="nav-icon">👥</span> Team</div>
+      <div class="nav-group-label">Knowledge</div>
+      <div class="nav-item" onclick="showSection('documents')"><span class="nav-icon">📄</span> Documents</div>
+      <div class="nav-item" onclick="showSection('wiki')"><span class="nav-icon">📚</span> Wiki</div>
+      <div class="nav-group-label">Personal</div>
+      <div class="nav-item" onclick="showSection('notes')"><span class="nav-icon">📝</span> My Notes</div>
+      <div class="nav-item" onclick="showSection('ideas')"><span class="nav-icon">💡</span> Ideas Board</div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-badge-side" id="user-badge">👤</div>
+      <button class="logout-btn" onclick="doLogout()">🚪 Log Out</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <div class="greeting-block">
+        <h2 id="greeting-text">Welcome!</h2>
+        <p>Filina Studios — Team Workspace</p>
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <section class="ws-section active" id="section-dashboard">
+      <div class="section-title">🏠 Dashboard</div>
+      <div class="section-desc">Overview of everything happening at Filina Studios.</div>
+      <div id="dashboard-stats"></div>
+      <div class="dash-grid">
+        <div class="card"><div class="card-title">📋 Active Projects</div><div id="project-preview"></div></div>
+        <div class="card"><div class="card-title">🎯 Goals Progress</div><div id="goals-preview"></div></div>
+      </div>
+    </section>
+
+    <!-- EPISODES -->
+    <section class="ws-section" id="section-episodes">
+      <div class="section-title">🎙️ Episodes</div>
+      <div class="section-desc">Track all podcast episodes from idea to publish.</div>
+      <div class="section-toolbar"><span></span><button class="add-btn" onclick="openModal('episode')">+ New Episode</button></div>
+      <div class="card"><div class="table-wrap"><table>
+        <thead><tr><th>#</th><th>Title</th><th>Status</th><th>Record Date</th><th>Publish Date</th><th>Guest</th><th>Actions</th></tr></thead>
+        <tbody id="episodes-table"></tbody>
+      </table></div></div>
+    </section>
+
+    <!-- EPISODE BOARD -->
+    <section class="ws-section" id="section-kanban">
+      <div class="section-title">📌 Episode Board</div>
+      <div class="section-desc">Visual pipeline of your episodes.</div>
+      <div class="card" style="overflow-x:auto"><div id="podcast-kanban"></div></div>
+    </section>
+
+    <!-- EQUIPMENT -->
+    <section class="ws-section" id="section-equipment">
+      <div class="section-title">🛠️ Equipment</div>
+      <div class="section-desc">Track all studio gear, condition, and purchase info.</div>
+      <div class="section-toolbar"><span></span><button class="add-btn" onclick="openModal('equipment')">+ Add Equipment</button></div>
+      <div class="card"><div class="table-wrap"><table>
+        <thead><tr><th>Name</th><th>Category</th><th>Brand</th><th>Model</th><th>Condition</th><th>Price</th><th>Actions</th></tr></thead>
+        <tbody id="equipment-table"></tbody>
+      </table></div></div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="ws-section" id="section-projects">
+      <div class="section-title">📋 Projects</div>
+      <div class="section-desc">All ongoing and upcoming Filina Studios projects.</div>
+      <div class="section-toolbar"><span></span><button class="add-btn" onclick="openModal('project')">+ New Project</button></div>
+      <div class="card"><div class="table-wrap"><table>
+        <thead><tr><th>Project</th><th>Status</th><th>Priority</th><th>Owner</th><th>Due</th><th>Tags</th><th>Actions</th></tr></thead>
+        <tbody id="projects-table"></tbody>
+      </table></div></div>
+    </section>
+
+    <!-- TASKS -->
+    <section class="ws-section" id="section-tasks">
+      <div class="section-title">✅ Tasks</div>
+      <div class="section-desc">Day-to-day tasks for the whole team.</div>
+      <div class="section-toolbar"><span></span><button class="add-btn" onclick="openModal('task')">+ New Task</button></div>
+      <div class="card"><div class="table-wrap"><table>
+        <thead><tr><th>Task</th><th>Status</th><th>Priority</th><th>Owner</th><th>Due</th><th>Actions</th></tr></thead>
+        <tbody id="tasks-table"></tbody>
+      </table></div></div>
+    </section>
+
+    <!-- GOALS -->
+    <section class="ws-section" id="section-goals">
+      <div class="section-title">🎯 Goals</div>
+      <div class="section-desc">Quarterly goals and progress tracking.</div>
+      <div class="section-toolbar"><span></span><button class="add-btn" onclick="openModal('goal')">+ New Goal</button></div>
+      <div class="card"><div id="goals-full"></div></div>
+    </section>
+
+    <!-- CONTENT CALENDAR -->
+    <section class="ws-section" id="section-content">
+      <div class="section-title">📣 Content Calendar</div>
+      <div class="section-desc">Plan and track all social media content.</div>
+      <div class="section-toolbar"><span></span><button class="add-btn" onclick="openModal('content')">+ New Content</button></div>
+      <div class="card"><div class="table-wrap"><table>
+        <thead><tr><th>Title</th><th>Platform</th><th>Status</th><th>Creator</th><th>Date</th><th>Actions</th></tr></thead>
+        <tbody id="content-table"></tbody>
+      </table></div></div>
+    </section>
+
+    <!-- CONTACTS -->
+    <section class="ws-section" id="section-contacts">
+      <div class="section-title">🤝 Contacts & Guests</div>
+      <div class="section-desc">Manage guests, sponsors, and important contacts.</div>
+      <div class="section-toolbar"><span></span><button class="add-btn" onclick="openModal('contact')">+ New Contact</button></div>
+      <div class="card"><div class="table-wrap"><table>
+        <thead><tr><th>Name</th><th>Type</th><th>Company</th><th>Email</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="contacts-table"></tbody>
+      </table></div></div>
+    </section>
+
+    <!-- FINANCE -->
+    <section class="ws-section" id="section-finance">
+      <div class="section-title">💰 Finance</div>
+      <div class="section-desc">Track all expenses, income, and financial status.</div>
+      <div class="section-toolbar"><span></span><button class="add-btn" onclick="openModal('finance')">+ New Entry</button></div>
+      <div id="finance-summary"></div>
+      <div class="card"><div class="table-wrap"><table>
+        <thead><tr><th>Name</th><th>Type</th><th>Category</th><th>Amount</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+        <tbody id="finance-table"></tbody>
+      </table></div></div>
+    </section>
+
+    <!-- TEAM -->
+    <section class="ws-section" id="section-team">
+      <div class="section-title">👥 Team</div>
+      <div class="section-desc">All members of the Filina Studios team.</div>
+      <div class="section-toolbar"><span></span><button class="add-btn" onclick="openModal('team')">+ Add Member</button></div>
+      <div id="team-gallery"></div>
+    </section>
+
+    <!-- DOCUMENTS -->
+    <section class="ws-section" id="section-documents">
+      <div class="section-title">📄 Documents</div>
+      <div class="section-desc">SOPs, guides, and policies. Click a doc to open and edit.</div>
+      <div class="section-toolbar"><span></span><button class="add-btn" onclick="openModal('document')">+ New Document</button></div>
+      <div id="doc-grid"></div>
+    </section>
+
+    <!-- WIKI -->
+    <section class="ws-section" id="section-wiki">
+      <div class="section-title">📚 Wiki</div>
+      <div class="section-desc">Team knowledge base.</div>
+      <div class="card"><div id="wiki-tree"></div></div>
+    </section>
+
+    <!-- NOTES -->
+    <section class="ws-section" id="section-notes">
+      <div class="section-title">📝 My Notes</div>
+      <div class="section-desc">Personal notes — saved in your browser.</div>
+      <div class="card">
+        <textarea id="personal-notes" placeholder="Type your notes here..." oninput="saveNotes()"></textarea>
+        <button class="notes-save-btn" onclick="saveNotes()">💾 Saved automatically</button>
+      </div>
+    </section>
+
+    <!-- IDEAS -->
+    <section class="ws-section" id="section-ideas">
+      <div class="section-title">💡 Ideas Board</div>
+      <div class="section-desc">Dump all your ideas here before they escape!</div>
+      <div class="card">
+        <div class="idea-input-row">
+          <input type="text" id="idea-input" placeholder="Type an idea and press Add or Enter..."
+                 onkeydown="if(event.key==='Enter') addIdea()"/>
+          <button class="add-btn" onclick="addIdea()">+ Add</button>
+        </div>
+        <ul id="ideas-list"></ul>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- MODAL -->
+<div id="modal" class="hidden" onclick="closeModalOutside(event)">
+  <div id="modal-content"></div>
+</div>
+
+<script src="js/workspace.js"></script>
+</body>
+</html>
