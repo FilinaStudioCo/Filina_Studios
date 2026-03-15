@@ -1,77 +1,129 @@
-const episodes = [
-  { number: 1, title: "Episode 1 — Coming Soon!", status: "planned", desc: "Our very first episode is in the works. Stay tuned for the premiere of Aling Lina!" },
-  { number: 2, title: "Episode 2 — Idea Stage", status: "idea", desc: "Big ideas brewing. This episode is being planned by the team." },
-  { number: 3, title: "Episode 3 — Idea Stage", status: "idea", desc: "Something exciting is coming. Watch this space!" },
-  { number: 4, title: "Episode 4 — Idea Stage", status: "idea", desc: "Kwento is being crafted. More details soon!" },
-  { number: 5, title: "Episode 5 — Idea Stage", status: "idea", desc: "The team is brainstorming big topics for this one." },
+// =============================================
+//  TALKING AVATAR ANIMATION — Aling Lina
+// =============================================
+
+const hosts = [
+  {
+    id: 'angelina',
+    bubbleId: 'bubble-angelina',
+    dotsId: 'talking-angelina',
+    quotes: [
+      '💬 "Busy nga ako but wait — pakinggan mo muna tong idea ko."',
+      '💬 "Sige, gagawin ko na. Sabay sa thesis ko."',
+      '💬 "May PhD plan ako... oo, seryoso."',
+      '💬 "Wala na akong time. Anyway, bagong project!"'
+    ]
+  },
+  {
+    id: 'catalina',
+    bubbleId: 'bubble-catalina',
+    dotsId: 'talking-catalina',
+    quotes: [
+      '💬 "Okay, real talk lang — huwag kayong mag-judge ha."',
+      '💬 "Hindi mo alam kung iiyak ka o matatawa — basta pakinggan mo."',
+      '💬 "Dumaan na ako sa bagyo — marami. Nakatayo pa rin ako."',
+      '💬 "Bes, totoo yan. Promise."'
+    ]
+  },
+  {
+    id: 'rosalinda',
+    bubbleId: 'bubble-rosalinda',
+    dotsId: 'talking-rosalinda',
+    quotes: [
+      '💬 "It is okay, I am here. Tell me everything."',
+      '💬 "Nandito lang ako. Kwento mo sa akin."',
+      '💬 "Schedule updated na. Relax kayo."',
+      '💬 "Bahala na ako. Walang mag-aalala."'
+    ]
+  }
 ];
 
-function renderEpisodes() {
-  const grid = document.getElementById("episodes-grid");
-  const coming = document.getElementById("coming-soon");
-  const published = episodes.filter(e => e.status === "published");
-  if (published.length > 0) {
-    coming.style.display = "none";
-    episodes.forEach(ep => {
-      const card = document.createElement("div");
-      card.className = "episode-card";
-      card.innerHTML = `
-        <span class="ep-number">Ep. ${ep.number}</span>
-        <span class="ep-status ${ep.status}">${ep.status === "published" ? "✅ Published" : ep.status === "planned" ? "📝 Planned" : "💡 Idea"}</span>
-        <h3>${ep.title}</h3>
-        <p>${ep.desc}</p>`;
-      grid.appendChild(card);
-    });
-    document.getElementById("ep-count").textContent = published.length;
-  } else {
-    coming.style.display = "block";
-    document.getElementById("ep-count").textContent = "0";
-  }
+let currentSpeaker = 0;
+const quoteIndexes = [0, 0, 0];
+
+function activateSpeaker(index) {
+  // Reset all
+  hosts.forEach(function(h) {
+    var bubble = document.getElementById(h.bubbleId);
+    var dots   = document.getElementById(h.dotsId);
+    var card   = document.getElementById('host-' + h.id);
+    if (bubble) bubble.classList.remove('visible');
+    if (dots)   dots.classList.remove('active');
+    if (card)   card.classList.remove('is-talking');
+  });
+
+  var host   = hosts[index];
+  var bubble = document.getElementById(host.bubbleId);
+  var dots   = document.getElementById(host.dotsId);
+  var card   = document.getElementById('host-' + host.id);
+
+  if (!bubble || !dots || !card) return;
+
+  // Set quote and cycle
+  bubble.textContent      = host.quotes[quoteIndexes[index]];
+  quoteIndexes[index]     = (quoteIndexes[index] + 1) % host.quotes.length;
+
+  bubble.classList.add('visible');
+  dots.classList.add('active');
+  card.classList.add('is-talking');
 }
 
-function animateCounter(el, target, duration = 1500) {
-  let start = 0;
-  const step = target / (duration / 16);
-  const timer = setInterval(() => {
-    start += step;
-    if (start >= target) { el.textContent = target.toLocaleString(); clearInterval(timer); }
-    else { el.textContent = Math.floor(start).toLocaleString(); }
-  }, 16);
+function startTalkingCycle() {
+  activateSpeaker(currentSpeaker);
+  setInterval(function() {
+    currentSpeaker = (currentSpeaker + 1) % hosts.length;
+    activateSpeaker(currentSpeaker);
+  }, 3500);
 }
+
+// =============================================
+//  NAV + FORMS
+// =============================================
 
 function toggleMenu() {
-  document.querySelector(".nav-links").classList.toggle("open");
+  document.querySelector('.nav-links').classList.toggle('open');
 }
 
 function subscribeNewsletter(e) {
   e.preventDefault();
-  document.getElementById("subscribe-msg").style.display = "block";
+  var msg = document.getElementById('subscribe-msg');
+  if (msg) msg.style.display = 'inline-block';
   e.target.reset();
 }
 
 function sendContact(e) {
   e.preventDefault();
-  document.getElementById("contact-msg").style.display = "block";
+  var msg = document.getElementById('contact-msg');
+  if (msg) msg.style.display = 'inline-block';
   e.target.reset();
 }
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add("visible");
-  });
-}, { threshold: 0.1 });
+// =============================================
+//  COUNTER ANIMATION
+// =============================================
 
-const style = document.createElement("style");
-style.textContent = ".visible { opacity: 1 !important; transform: translateY(0) !important; }";
-document.head.appendChild(style);
+function animateCount(id, end) {
+  var el = document.getElementById(id);
+  if (!el || end === 0) return;
+  var start = 0;
+  var step  = Math.ceil(end / 60);
+  var timer = setInterval(function() {
+    start += step;
+    if (start >= end) {
+      el.textContent = end;
+      clearInterval(timer);
+    } else {
+      el.textContent = start;
+    }
+  }, 30);
+}
 
-document.addEventListener("DOMContentLoaded", () => {
-  renderEpisodes();
-  animateCounter(document.getElementById("dl-count"), 0);
-  document.querySelectorAll(".about-card, .host-card, .platform-card").forEach(el => {
-    el.style.opacity = "0";
-    el.style.transform = "translateY(30px)";
-    el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-    observer.observe(el);
-  });
+// =============================================
+//  INIT
+// =============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+  animateCount('ep-count', 0);
+  animateCount('dl-count', 0);
+  setTimeout(startTalkingCycle, 1200);
 });
